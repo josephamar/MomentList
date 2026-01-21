@@ -1,10 +1,13 @@
 import sys
 import os
+import traceback
 
-# Ajouter le dossier parent au path pour pouvoir importer flask_app
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from flask_app.app import create_app
-
-# Créer l'app pour Vercel
-app = create_app()
+try:
+    from flask_app.app import create_app
+    app = create_app()
+except Exception as e:
+    print("BOOT ERROR:", repr(e))
+    traceback.print_exc()
+    raise
