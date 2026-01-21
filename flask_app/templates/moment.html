@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ moment.title }} - MomentList</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; color: white; margin-bottom: 40px; }
+        section { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        h1, h2, h3 { color: #667eea; margin-bottom: 15px; }
+        p { margin: 10px 0; color: #666; }
+        form { display: flex; gap: 10px; margin: 20px 0; }
+        input { flex: 1; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; }
+        button { padding: 12px 24px; background: #667eea; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        button:hover { background: #5568d3; }
+        .participant-item, .request-item { background: #f0f0f0; padding: 12px 15px; border-radius: 5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-approve { background: #4caf50; padding: 8px 16px; color: white; text-decoration: none; border-radius: 5px; }
+        .btn-reject { background: #f44336; padding: 8px 16px; color: white; text-decoration: none; border-radius: 5px; margin-left: 10px; }
+        .back-btn { display: inline-block; padding: 12px 24px; background: #757575; color: white; text-decoration: none; border-radius: 8px; margin-top: 20px; }
+        .back-btn:hover { background: #616161; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎉 {{ moment.title }}</h1>
+        </header>
+
+        <section>
+            <h2>Détails du moment</h2>
+            <p><strong>Description:</strong> {{ moment.description }}</p>
+            <p><strong>Mode:</strong> {% if moment.mode == 'auto' %}Rejoindre automatiquement{% else %}Sur demande{% endif %}</p>
+            <p><strong>Créé par:</strong> {{ moment.created_by }}</p>
+        </section>
+
+        <section>
+            <h2>Rejoindre ce moment</h2>
+            <form action="/join/{{ moment.id }}" method="POST">
+                <input type="text" name="user_name" placeholder="Votre nom" required>
+                <button type="submit">Rejoindre</button>
+            </form>
+        </section>
+
+        <section>
+            <h3>👥 Participants ({{ participants|length }})</h3>
+            {% if participants %}
+                {% for p in participants %}
+                <div class="participant-item">
+                    <span>👤 {{ p.user_name }}</span>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun participant pour le moment.</p>
+            {% endif %}
+        </section>
+
+        {% if requests %}
+        <section>
+            <h3>📨 Demandes en attente ({{ requests|length }})</h3>
+            {% for r in requests %}
+            <div class="request-item">
+                <span>👤 {{ r.user_name }}</span>
+                <div>
+                    <a href="/approve/{{ r.id }}" class="btn-approve">✅ Approuver</a>
+                    <a href="/reject/{{ r.id }}" class="btn-reject">❌ Rejeter</a>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        <a href="/" class="back-btn">← Retour à la liste</a>
+    </div>
+</body>
+</html>
