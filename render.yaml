@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: momentlist
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 4 -b 0.0.0.0:$PORT flask_app.app:app
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+```
+
+**Sauvegardez**
+
+### 2. Ajouter gunicorn aux requirements
+
+**Ouvrez `requirements.txt` et ajoutez une ligne:**
+```
+flask==3.1.2
+supabase==2.15.0
+python-dotenv==1.0.1
+gunicorn==21.2.0
