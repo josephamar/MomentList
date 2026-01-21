@@ -1,38 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MomentList - Gérez vos moments</title>
-    <link rel="stylesheet" href="style.css">
+    <title>MomentList Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #667eea; color: white; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; color: #333; }
+        input, textarea, select, button { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #667eea; color: white; cursor: pointer; border: none; }
+        .moment { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 8px; }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- En-tête -->
-        <header>
-            <h1>🎉 MomentList</h1>
-            <p>Créez et rejoignez des moments inoubliables</p>
-        </header>
-
-        <!-- Section: Créer un moment -->
-        <section class="create-moment">
-            <h2>Créer un nouveau moment</h2>
-            <form id="createMomentForm">
-                <input type="text" id="title" placeholder="Titre du moment" required>
-                <textarea id="description" placeholder="Description" required></textarea>
-                <select id="mode">
-                    <option value="auto">Auto (Rejoindre automatiquement)</option>
-                    <option value="request">Request (Demande d'approbation)</option>
-                </select>
-                <input type="text" id="createdBy" placeholder="Votre nom" required>
-                <button type="submit">Créer le moment</button>
-            </form>
-        </section>
-
-        <!-- Section: Liste des moments -->
-        <section class="moments-list">
-            <h2>Moments disponibles</h2>
-            <div id="momentsList"></div>
-        </section>
-
-        <!-- Section: Détails d'un moment (cachée par défa
+        <h1>🎉 MomentList</h1>
+        
+        <h2>Créer un moment</h2>
+        <form id="form">
+            <input type="text" id="title" placeholder="Titre" required>
