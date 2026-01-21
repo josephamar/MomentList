@@ -10,8 +10,8 @@ if os.path.exists('.env'):
 app = Flask(__name__)
 
 # Récupérer les variables avec valeurs par défaut pour debug
-SUPABASE_URL = os.environ.get("SUPABASE_URL") or os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or os.getenv("SUPABASE_KEY")
+SUPABASE_URL = "https://piqxujpixtloryjlmett.supabase.co"
+SUPABASE_KEY = "sb_publishable_WVFlat2SPzaEnkgm6y6meA_idLg03H1"
 
 # Debug: vérifier si les variables sont chargées
 if not SUPABASE_URL or not SUPABASE_KEY:
