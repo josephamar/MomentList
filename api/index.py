@@ -1,7 +1,5 @@
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.get("/")
-def home():
-    return "OK ✅ Flask is running on Vercel"
+def handler(request):
+    return {
+        "statusCode": 200,
+        "body": "🎉 Bravo ! Ton Python fonctionne sur Vercel"
+    }
