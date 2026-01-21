@@ -1,5 +1,6 @@
 def handler(request):
-    return {
-        "statusCode": 200,
-        "body": "🎉 Bravo ! Ton Python fonctionne sur Vercel"
-    }
+    return (
+        "🎉 Bravo ! Ton Python fonctionne sur Vercel",
+        200,
+        {"Content-Type": "text/plain; charset=utf-8"}
+    )
