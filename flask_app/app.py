@@ -3,11 +3,23 @@ import os
 from supabase import create_client
 from dotenv import load_dotenv
 
-# Connexion Supabase (les variables sont déjà dans l'environnement sur Render)
-supabase = create_client(
-    os.environ.get("SUPABASE_URL"),
-    os.environ.get("SUPABASE_KEY")
-)
+# Charger .env seulement en développement local
+if os.path.exists('.env'):
+    load_dotenv()
+
+app = Flask(__name__)
+
+# Récupérer les variables avec valeurs par défaut pour debug
+SUPABASE_URL = os.environ.get("SUPABASE_URL") or os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY") or os.getenv("SUPABASE_KEY")
+
+# Debug: vérifier si les variables sont chargées
+if not SUPABASE_URL or not SUPABASE_KEY:
+    print(f"ERROR: Missing env vars - URL: {bool(SUPABASE_URL)}, KEY: {bool(SUPABASE_KEY)}")
+    raise ValueError("Missing Supabase credentials")
+
+# Connexion Supabase
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 @app.route('/')
 def index():
