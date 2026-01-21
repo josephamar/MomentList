@@ -3,14 +3,10 @@ import os
 from supabase import create_client
 from dotenv import load_dotenv
 
-load_dotenv()
-
-app = Flask(__name__)
-
-# Connexion Supabase
+# Connexion Supabase (les variables sont déjà dans l'environnement sur Render)
 supabase = create_client(
-    os.getenv("SUPABASE_URL"),
-    os.getenv("SUPABASE_KEY")
+    os.environ.get("SUPABASE_URL"),
+    os.environ.get("SUPABASE_KEY")
 )
 
 @app.route('/')
